@@ -1,10 +1,11 @@
 import React from "react";
 import LogoGenukaTrust from "../assets/images/Genuka1.jpg";
+import { link } from "fs";
 
 const Footer: React.FC = () => {
-    const resources = ["Documentation", "Guides", "Centre d'aide", "API"];
-    const legal = ["Conditions d'utilisation", "Politique de confidentialité", "Mentions légales", "CGV"];
-    const socialIcons = ["fab fa-facebook-f", "fab fa-twitter", "fab fa-instagram", "fab fa-linkedin-in"];
+    const resources = {labels: ["Documentation", "Guides", "Centre d'aide", "API"] , links:["/docs", "#", "#", "/api-docs"]};
+    const legal = {labels: ["Conditions d'utilisation", "Politique de confidentialité", "Mentions légales", "CGV"], links:["/cgu", "/privacy", "/mentions-legales", "/cgv"]};
+    const socialIcons = {labels: ["fab fa-facebook-f", "fab fa-twitter", "fab fa-instagram", "fab fa-linkedin-in"], links:["#", "#", "#", "# "]};
 
     return (
         <footer className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-t border-gray-200/50 dark:border-gray-700/50 py-8 ">
@@ -12,7 +13,7 @@ const Footer: React.FC = () => {
                 {/* Logo + Description */}
                 <div>
                     <div className="flex items-center mb-2">
-                        <img src={LogoGenukaTrust.src} alt="Logo" className="w-auto h-10 rounded-lg border border-gray-200 dark:border-gray-700" />
+                        <img src={LogoGenukaTrust.src} alt="Logo" className="w-auto h-15 rounded-lg border border-gray-200 dark:border-gray-700" />
                         <span className="ml-2 text-xl font-bold bg-gradient-to-r from-primary-600 to-primary-800 dark:from-primary-400 dark:to-primary-300 bg-clip-text text-transparent">
                             Genuka Trust
                         </span>
@@ -26,9 +27,9 @@ const Footer: React.FC = () => {
                 <div>
                     <h4 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4">Ressources</h4>
                     <ul className="space-y-2">
-                        {resources.map((item) => (
+                        {resources.labels.map((item, i) => (
                             <li key={item}>
-                                <a href="#" className="text-sm text-gray-600 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400 transition-colors">{item}</a>
+                                <a href={resources.links[i]} className="text-sm text-gray-600 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400 transition-colors" target="_blank" rel="noopener noreferrer">{item}</a>
                             </li>
                         ))}
                     </ul>
@@ -38,9 +39,9 @@ const Footer: React.FC = () => {
                 <div>
                     <h4 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4">Légal</h4>
                     <ul className="space-y-2">
-                        {legal.map((item) => (
+                        {legal.labels.map((item, i) => (
                             <li key={item}>
-                                <a href="#" className="text-sm text-gray-600 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400 transition-colors">{item}</a>
+                                <a href={legal.links[i]} className="text-sm text-gray-600 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400 transition-colors" target="_blank">{item}</a>
                             </li>
                         ))}
                     </ul>
@@ -67,8 +68,8 @@ const Footer: React.FC = () => {
             <div className="border-t border-gray-200 dark:border-gray-700 pt-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500 dark:text-gray-400">
                 <p>&copy; 2025 Genuka Trust. Tous droits réservés.</p>
                 <div className="flex space-x-6 mt-4 md:mt-0">
-                    {socialIcons.map((icon) => (
-                        <a href="#" key={icon} className="hover:text-gray-500 dark:hover:text-gray-300 transition-colors">
+                    {socialIcons.labels.map((icon, i) => (
+                        <a href={socialIcons.links[i]} key={icon} className="hover:text-gray-500 dark:hover:text-gray-300 transition-colors">
                             <i className={icon}></i>
                         </a>
                     ))}
