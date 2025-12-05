@@ -21,7 +21,7 @@ export default function NotificationDropdown() {
               </span>
             )}
           </Menu.Button>
-          
+
           <Transition
             show={open}
             as={Fragment}
@@ -32,7 +32,7 @@ export default function NotificationDropdown() {
             leaveFrom="transform opacity-100 scale-100"
             leaveTo="transform opacity-0 scale-95"
           >
-            <Menu.Items className="absolute right-0 z-50 mt-2 w-80 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <Menu.Items className="absolute right-0 z-10 mt-2 w-80 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
               <div className="flex items-center justify-between border-b border-gray-200 px-4 py-2">
                 <h3 className="text-sm font-medium text-gray-900">Notifications</h3>
                 {unreadCount > 0 && (
@@ -56,10 +56,9 @@ export default function NotificationDropdown() {
                   notifications.map((notification) => (
                     <Menu.Item key={notification.id}>
                       {({ active }) => (
-                        <div 
-                          className={`flex items-start px-4 py-3 text-sm ${
-                            !notification.read ? 'bg-blue-50' : ''
-                          } ${active ? 'bg-gray-50' : ''}`}
+                        <div
+                          className={`flex items-start px-4 py-3 text-sm ${!notification.read ? 'bg-blue-50' : ''
+                            } ${active ? 'bg-gray-50' : ''}`}
                           onClick={() => !notification.read && markAsRead(notification.id)}
                         >
                           <div className="flex-shrink-0 mt-0.5">

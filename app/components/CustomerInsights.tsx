@@ -182,21 +182,26 @@ export default function CustomerInsights() {
         transition={{ duration: 0.5, ease: "easeOut" }}
         className="mb-8"
       >
-        <div className="relative overflow-hidden rounded-xl bg-gradient-to-r from-yellow-600 to-yellow-700 p-6 shadow-lg">
+        <div className="relative overflow-hidden rounded-xl bg-linear-to-r from-amber-500 to-amber-600 p-6 shadow-lg bg-backdrop-blur-sm border border-yellow-200">
           {/* Effet de vague décoratif */}
           <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-white/20"></div>
           <div className="absolute -right-5 -bottom-5 h-20 w-20 rounded-full bg-white/20"></div>
           
+          <div className="absolute -left-10 -top-5 h-32 w-32 rounded-full bg-white/20"></div>
+          <div className="absolute -left-5 -bottom-10 h-50 w-50 rounded-full bg-white/20"></div>
+          <div className="absolute -right-1/2 -top-2 h-32 w-32 rounded-full bg-white/20"></div>
+          <div className="absolute -right-5 -bottom-5 h-20 w-20 rounded-full bg-white/20"></div>
+
           <div className="relative z-10">
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-2xl font-bold text-white">Aperçu des performances</h2>
-                <p className="mt-1 text-yellow-100">Analyse détaillée des avis clients</p>
+                <p className="mt-1 text-yellow-100 text-sm">Analyse détaillée des avis clients</p>
               </div>
               <div className="hidden md:block">
                 <div className="flex items-center space-x-2 rounded-full bg-white/30 px-4 py-2 backdrop-blur-sm">
-                  <span className="text-sm font-medium text-white">Mise à jour en temps réel</span>
-                  <span className="h-2 w-2 animate-pulse rounded-full bg-white"></span>
+                  <span className="h-2 w-2 animate-pulse rounded-full bg-blue-500"></span>
+                  <span className="text-sm font-medium text-gray-600">Temps réel</span>
                 </div>
               </div>
             </div>

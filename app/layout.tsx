@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import {NotificationProvider } from '@/app/contexts/NotificationContext'
+import { NotificationProvider } from "./contexts/NotificationContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -56,9 +56,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
+    <html lang="fr" className="h-full">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 h-full`}
       >
         <NotificationProvider>
           <div className="min-h-screen flex flex-col">

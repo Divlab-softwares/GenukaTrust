@@ -27,36 +27,16 @@ const Header =() =>{
                 alt="Genuka Logo"
                 className="h-10 w-auto"
               />
-              <span className="ml-3 text-2xl font-bold bg-linear-to-r from-amber-500 to-amber-700 bg-clip-text">Genuka Trust</span>
+              <span className="ml-3 text-2xl font-bold bg-linear-to-r from-amber-500 to-amber-700 bg-clip-text text-transparent">Genuka Trust</span>
             </div>
             <div className="h-6 w-px bg-gray-200"></div>
             {/* <h2 className="text-base font-medium text-gray-700">
               Bonjour, <span className="font-semibold">Ma Boutique</span> 👋
             </h2> */}
-          </div>
-        </div>
-      </div>
-
-      {/* En-tête principal avec ombre portée */}
-      <motion.header
-        className="bg-gray-50 border-b border-gray-200"
-        initial={{ y: -10, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.4, ease: "easeOut" }}
-      >
-        <div className="px-6 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between max-w-7xl mx-auto w-full">
-          <div className="mb-4 sm:mb-0">
-            <div className="flex items-center">
-              <h1 className="text-2xl font-bold text-yellow-600">
-                Tableau de bord
-              </h1>
-            </div>
-            <p className="text-sm text-gray-500 mt-1">
-              Bienvenue sur votre espace d'administration • <TimeDisplay />
-            </p>
+            
           </div>
 
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center  space-x-3">
             <div className="relative flex-1 sm:flex-none sm:w-64">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <MagnifyingGlassIcon className="h-4 w-4 text-gray-400" />
@@ -83,6 +63,27 @@ const Header =() =>{
             </div>
           </div>
         </div>
+      </div>
+
+      {/* En-tête principal avec ombre portée */}
+      <motion.header
+        className="bg-gray-50 border-b border-gray-200"
+        initial={{ y: -10, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
+      >
+        <div className="px-3 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between max-w-7xl mx-auto w-full">
+          <div className="mb-4 sm:mb-0">
+            <div className="flex items-center">
+              <h1 className="text-3xl font-bold text-black">
+                Tableau de bord
+              </h1>
+            </div>
+            <p className="text-sm text-gray-500 mt-1">
+              Bienvenue sur votre espace d'administration • <TimeDisplay />
+            </p>
+          </div>
+        </div>
       </motion.header>
     </div>
   );
@@ -103,13 +104,7 @@ export default function Home() {
       <Header />
       <main className="p-6">
         <div className="mb-8 bg-linear-to-br from-yellow-50 to-yellow-100 rounded-2xl p-6 shadow-sm border border-yellow-100">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-yellow-800">Aperçu des performances</h2>
-            <div className="flex items-center space-x-2 bg-white/50 px-3 py-1.5 rounded-full border border-yellow-200">
-              <div className="h-2 w-2 rounded-full bg-blue-500 animate-pulse"></div>
-              <span className="text-sm font-medium text-yellow-700">En temps réel</span>
-            </div>
-          </div>
+       
 
           <CustomerInsights />
 

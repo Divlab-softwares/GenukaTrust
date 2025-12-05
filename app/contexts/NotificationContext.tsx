@@ -22,12 +22,7 @@ interface NotificationContextType {
 const NotificationContext = createContext<NotificationContextType | undefined>(undefined);
 
 export function NotificationProvider({ children }: { children: ReactNode }) {
-  const [notifications, setNotifications] = useState<Notification[]>([
-    { id: 1, user: 'Marie D.', action: 'a publié un nouvel avis', time: '2 min', icon: '💬', read: false },
-    { id: 2, user: 'Thomas L.', action: 'a partagé un commentaire', time: '15 min', icon: '💡', read: false },
-    { id: 3, user: 'Sophie M.', action: 'a noté 5 étoiles', time: '1h', icon: '⭐', read: false },
-    { id: 4, user: 'Alex R.', action: 'a partagé sur les réseaux', time: '3h', icon: '📱', read: true },
-  ]);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
 
   const unreadCount = notifications.filter(n => !n.read).length;
 
@@ -57,7 +52,7 @@ export function NotificationProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <NotificationContext.Provider 
+    <NotificationContext.Provider
       value={{
         notifications,
         unreadCount,
