@@ -70,8 +70,8 @@ Badges techniques
 
 🧩 Widget d’avis
 <p align="center"><img src="https://github.com/Divlab-softwares/GenukaTrust/blob/main/app/assets/images/widget.PNG" width="80%"></p>
-📈 Dashboard IA 
-<p align="center"><img src="https://via.placeholder.com/700x300/182848/FFFFFF?text=Dashboard+Trust+Analytics" width="80%"></p>
+📈 Dashboard  
+<p align="center"><img src="https://github.com/Divlab-softwares/GenukaTrust/blob/main/app/assets/images/en_tete_dashbord.png" width="80%"></p>
 ⭐ Badges de confiance
 <p align="center"><img src="https://via.placeholder.com/600x200/EDEDED/333333?text=Trusted+Seller+Badges" width="70%"></p>
 
