@@ -1,7 +1,6 @@
 # GenukaTrust - collecteur d'avis intelligent
 
 <p align="center"> <img src="https://img.shields.io/badge/Status-Hackathon%20Project-blue?style=for-the-badge"/> <img src="https://img.shields.io/badge/Platform-Genuka-orange?style=for-the-badge"/> <img src="https://img.shields.io/badge/Powered%20By-CIA CodeStorm%20%F0%9F%A4%96-green?style=for-the-badge"/> </p> 
-<p align="center"> <img src="https://img.shields.io/github/languages/top/?style=flat-square&logo=code&label=Tech Stack"/></p>
 <p align="center"> <img src="https://github.com/Divlab-softwares/GenukaTrust/blob/main/app/assets/images/Genuka1.jpg" width="70%"/> </p>
 
 ## 🗂 1.  ___Catégories du projet___
