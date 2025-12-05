@@ -4,26 +4,27 @@ import { useState, ChangeEvent, FormEvent } from "react";
 import Topbar from "./components/Topbar";
 import Footer from "./components/Footer";
 import { FaStar } from "react-icons/fa";
+import eclat from "./assets/images/eclat.png";
+import avis from "./assets/images/avis.png";
+import FallBeamBackground from "./components/FallBeamBackground";
 
 const ClientFeedbackPage: React.FC = () => {
   
   const [theme, setTheme] = useState("dark")
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
-  const [image, setImage] = useState<File | null>(null);
   const [submitted, setSubmitted] = useState(false);
 
-  // const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-  //   if (e.target.files && e.target.files[0]) {
-  //     setImage(e.target.files[0]);
-  //   }
-  // };
+
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+
+    if(comment == "" && rating == 0){
+      alert("Veuillez fournir au moins un commentaire ou une note avant de soumettre votre avis.");
+      return;
+    }
     // Ici, tu peux appeler ton API pour envoyer les données
     // console.log({ name, email, comment, rating, image });
     setSubmitted(true);
@@ -32,20 +33,21 @@ const ClientFeedbackPage: React.FC = () => {
   return (
     <>
       <Topbar theme={theme} setTheme={setTheme} />
-      <main className={`flex-grow   ${theme == "dark" ? "bg-linear-to-br from-gray-900 to-gray-800 text-gray-100" : " text-gray-800 "}   min-h-screen flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8`} data-theme={theme}>
-        <div className="w-full max-w-xl bg-white/90 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-xl p-8 border border-gray-200/50 dark:border-gray-700/50">
-          <h1 className="text-3xl text-white font-bold mb-4 bg-linear-to-r from-primary-500 to-primary-600 bg-clip-text text-transparent">
-            Laissez votre avis
+      <main className={`grow ${theme == "dark" ? "bg-linear-to-br from-gray-900 to-gray-800 text-gray-100" : " text-gray-800 "}   min-h-screen flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden`} data-theme={theme}>
+        <FallBeamBackground lineCount={20} beamColorClass="genuka" />
+        <div className={`w-full max-w-xl ${theme == "dark" ? "bg-gray-800/80 border-gray-700/50" : "bg-white/90 "} backdrop-blur-sm rounded-2xl  p-8 border border-gray-200/50 shadow-[0px_5px_20px_rgb(253,152,46,0.5)] hover:translate-y-[-2px] hover:shadow-[0px_10px_30px_rgb(253,152,46,0.7)] transition-all duration-300`}>
+          <h1 className={`text-3xl ${theme == "dark" ? "text-white bg-linear-to-r from-primary-500 to-primary-600 " : "text-black bg-linear-to-r from-primary-800 to-primary-900"} font-bold mb-4  bg-clip-text `}>
+            Laissez votre avis ✨
           </h1>
 
-          <p className="text-gray-600 dark:text-gray-300 mb-6 text-sm">
+          <p className={` ${theme == "dark" ? "text-gray-200" : "text-gray-900"} mb-6 text-sm`}>
             Votre retour nous aide à améliorer nos services et à mieux vous satisfaire.
           </p>
 
           {submitted ? (
             <div className="text-center py-12">
               <h2 className="text-2xl font-bold text-green-600 mb-4">Merci pour votre avis !</h2>
-              <p className="text-gray-600 dark:text-gray-300">Nous apprécions votre retour.</p>
+              <p className={`${theme == "dark" ? "text-gray-300" : "text-gray-600"}`}>Nous apprécions votre retour.</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -81,7 +83,7 @@ const ClientFeedbackPage: React.FC = () => {
                   value={comment}
                   onChange={(e) => setComment(e.target.value)}
                   rows={4}
-                  className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-700/50 dark:text-white transition-all duration-200"
+                  className={`w-full px-4 py-3 border-2 ${theme == "dark" ? "border-gray-700 text-white bg-gray-700/50" : "border-gray-200"} rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent   transition-all duration-200`}
                 ></textarea>
               </div>
 
@@ -98,10 +100,11 @@ const ClientFeedbackPage: React.FC = () => {
               </div> */}
 
               {/* Submit */}
-              <div>
+              <div className="relative">
+                <img className="absolute -left-8 -top-5 aspect-auto" src={eclat.src} />
                 <button
                   type="submit"
-                  className="w-full py-3 px-6 rounded-4xl bg-linear-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
+                  className="w-full py-3 px-6 rounded-4xl bg-amber-500 text-white font-semibold shadow-xl hover:shadow-3xl hover:-translate-y-0.5 transition-all duration-200 cursor-pointer"
                 >
                   Envoyer mon avis
                 </button>
@@ -110,6 +113,7 @@ const ClientFeedbackPage: React.FC = () => {
           )}
         </div>
       </main>
+      <img className="hidden md:flex translate-x-2  transition-all duration-400 fixed bottom-4 right-4 w-30 h-30 rounded-xl shadow-lg" src={avis.src} alt="Avis Client" />
       <Footer />
     </>
   );
