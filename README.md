@@ -69,8 +69,8 @@ Badges techniques
 ## 5. ___Aperçus & Maquettes___
 
 🧩 Widget d’avis
-<p align="center"><img src="https://via.placeholder.com/700x300/FFFFFF/333333?text=Avis+Widget+UI" width="80%"></p>
-📈 Dashboard IA
+<p align="center"><img src="https://app/assets/images/widget.PNG/700x300/FFFFFF/333333?text=Avis+Widget+UI" width="80%"></p>
+📈 Dashboard IA 
 <p align="center"><img src="https://via.placeholder.com/700x300/182848/FFFFFF?text=Dashboard+Trust+Analytics" width="80%"></p>
 ⭐ Badges de confiance
 <p align="center"><img src="https://via.placeholder.com/600x200/EDEDED/333333?text=Trusted+Seller+Badges" width="70%"></p>
