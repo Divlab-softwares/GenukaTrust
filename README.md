@@ -19,7 +19,7 @@ Genuka Trust est une application intelligente connectée à la plateforme Genuka
 
 ### 💡 ___Comment ça marche ?___
 
-   - Lorsqu’une commande est livrée, le client reçoit automatiquement un SMS/WhatsApp pour noter son expérience ( note de 1 à 5 étoiles et un commentaire)  ⭐
+   - Lorsqu’une commande est livrée(statut terminé), le client reçoit automatiquement un SMS/WhatsApp pour noter son expérience ( note de 1 à 5 étoiles et un commentaire)  ⭐
 
    - Son avis est analysé par une IA de sentiment 🤖
 
