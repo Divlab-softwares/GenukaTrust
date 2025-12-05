@@ -1,8 +1,7 @@
 # GenukaTrust - collecteur d'avis intelligent
 
 <p align="center"> <img src="https://img.shields.io/badge/Status-Hackathon%20Project-blue?style=for-the-badge"/> <img src="https://img.shields.io/badge/Platform-Genuka-orange?style=for-the-badge"/> <img src="https://img.shields.io/badge/Powered%20By-CIA CodeStorm%20%F0%9F%A4%96-green?style=for-the-badge"/> </p> 
-<p align="center"> <img src="https://img.shields.io/github/languages/top/?style=flat-square&logo=code&label=Tech Stack"/></p>
-<p align="center"> <img src="https://via.placeholder.com/900x400/162447/FFFFFF?text=GenukaTrust+-+Smart+Reviews+Dashboard" width="90%"/> </p>
+<p align="center"> <img src="https://github.com/Divlab-softwares/GenukaTrust/blob/main/app/assets/images/Genuka1.jpg" width="70%"/> </p>
 
 ## 🗂 1.  ___Catégories du projet___
 
@@ -26,8 +25,7 @@ Genuka Trust est une application intelligente connectée à la plateforme Genuka
    - Les avis positifs sont intégrés dans : un widget d’avis pour le site Genuka du marchand, des images prêtes pour réseaux sociaux, des badges de confiance dynamiques.
 
 ### 👉 Objectif : aider les PME à transformer leurs avis clients en véritable levier de confiance, augmenter la preuve sociale, booster la conversion, et créer de la confiance automatiquement.
-
-<p align="center"> <img src="https://via.placeholder.com/900x350/EAEAEA/333333?text=Widget+Reviews+Preview" width="90%"> </p>
+<p align="center"> <img src="https://github.com/Divlab-softwares/GenukaTrust/blob/main/app/assets/images/evolution.jpeg" width="90%"/> </p>
 
 ## ❗ 3.  ___Problème que GenukaTrust cherche à résoudre___
 
@@ -51,7 +49,6 @@ Genuka Trust est une application intelligente connectée à la plateforme Genuka
     ✔ Widget d’avis moderne pour les boutiques Genuka  
     ✔ Export & partage automatique sur réseaux sociaux  
 
-<p align="center"> <img src="https://via.placeholder.com/900x350/1e1e2f/FFFFFF?text=Dashboard+IA+Sentiment+Analysis" width="90%"/> </p>
 
 ## 🛠 4.  ___Technologies utilisées___
 
@@ -73,7 +70,6 @@ Badges techniques
 📈 Dashboard  
 <p align="center"><img src="https://github.com/Divlab-softwares/GenukaTrust/blob/main/app/assets/images/en_tete_dashord.png" width="80%"></p>
 ⭐ Badges de confiance
-<p align="center"><img src="https://via.placeholder.com/600x200/EDEDED/333333?text=Trusted+Seller+Badges" width="70%"></p>
 
 ## 🙌 6. Équipe & Contributions
 
