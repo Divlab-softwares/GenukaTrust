@@ -1,57 +1,84 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
+import { useState, useEffect, useMemo } from 'react';
+import { motion } from 'framer-motion';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { StarIcon, ArrowUpIcon, ArrowDownIcon } from '@heroicons/react/24/solid';
+import { sampleReviews } from '../data/sampleReviews';
 
-// Données des avis avec plus de points pour un graphique plus lisse
-const reviewData = [
-  { date: 'Jan', average: 4.2, count: 145, satisfaction: 82 },
-  { date: 'Fév', average: 4.3, count: 167, satisfaction: 85 },
-  { date: 'Mar', average: 4.1, count: 189, satisfaction: 80 },
-  { date: 'Avr', average: 4.4, count: 156, satisfaction: 87 },
-  { date: 'Mai', average: 4.5, count: 178, satisfaction: 89 },
-  { date: 'Juin', average: 4.6, count: 195, satisfaction: 91 },
-  { date: 'Juil', average: 4.7, count: 210, satisfaction: 93 },
-  { date: 'Août', average: 4.6, count: 198, satisfaction: 90 },
-  { date: 'Sep', average: 4.8, count: 225, satisfaction: 94 }
-];
+// Fonction pour regrouper les avis par mois
+const groupReviewsByMonth = (reviews: typeof sampleReviews) => {
+  const months = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sep', 'Oct', 'Nov', 'Déc'];
+  const currentDate = new Date();
+  const currentMonth = currentDate.getMonth();
 
-const ratingDistribution = [
-  { name: '5 étoiles', value: 68, color: '#10B981', bgColor: 'bg-green-100' },
-  { name: '4 étoiles', value: 20, color: '#3B82F6', bgColor: 'bg-blue-100' },
-  { name: '3 étoiles', value: 7, color: '#F59E0B', bgColor: 'bg-yellow-100' },
-  { name: '2 étoiles', value: 3, color: '#F97316', bgColor: 'bg-orange-100' },
-  { name: '1 étoile', value: 2, color: '#EF4444', bgColor: 'bg-red-100' }
-];
+  // Créer un objet pour stocker les données par mois
+  const monthlyData: Record<string, any> = {};
 
-const metrics = [
-  {
-    id: 1,
-    name: 'Note moyenne',
-    value: '4.6',
-    change: '+0.2',
-    changeType: 'increase',
-    trend: [4.2, 4.3, 4.1, 4.4, 4.5, 4.6, 4.7, 4.6, 4.8]
-  },
-  {
-    id: 2,
-    name: 'Avis ce mois-ci',
-    value: '1,234',
-    change: '+12%',
-    changeType: 'increase',
-    trend: [145, 167, 189, 156, 178, 195, 210, 198, 225]
-  },
-  {
-    id: 3,
-    name: 'Satisfaction',
-    value: '92%',
-    change: '+5%',
-    changeType: 'increase',
-    trend: [82, 85, 80, 87, 89, 91, 93, 90, 94]
+  // Initialiser les 6 derniers mois
+  for (let i = 5; i >= 0; i--) {
+    const monthIndex = (currentMonth - i + 12) % 12;
+    monthlyData[monthIndex] = {
+      date: months[monthIndex],
+      ratings: [],
+      count: 0,
+      published: 0,
+      pending: 0
+    };
   }
-];
+
+  // Remplir avec les données des avis
+  reviews.forEach(review => {
+    // Simuler une date aléatoire dans les 6 derniers mois
+    const monthIndex = Math.floor(Math.random() * 6);
+    const reviewDate = new Date();
+    reviewDate.setMonth(currentMonth - monthIndex);
+
+    const monthData = monthlyData[reviewDate.getMonth()];
+    if (monthData) {
+      monthData.ratings.push(review.rating);
+      monthData.count++;
+      if (review.published) {
+        monthData.published++;
+      } else {
+        monthData.pending++;
+      }
+    }
+  });
+
+  // Calculer les moyennes et autres métriques
+  return Object.values(monthlyData).map(month => ({
+    date: month.date,
+    average: month.ratings.length > 0
+      ? Number((month.ratings.reduce((sum: number, rating: number) => sum + rating, 0) / month.ratings.length).toFixed(1))
+      : 0,
+    count: month.count,
+    satisfaction: month.ratings.length > 0
+      ? Math.round((month.ratings.filter((rating: number) => rating >= 4).length / month.ratings.length) * 100)
+      : 0,
+    published: month.published,
+    pending: month.pending,
+    responseRate: Math.min(100, Math.round(Math.random() * 20) + 80) // Taux de réponse simulé
+  }));
+};
+
+// Types pour les métriques
+type Metric = {
+  id: number;
+  name: string;
+  value: string;
+  change: string;
+  changeType: 'increase' | 'decrease';
+  trend?: number[];  // Rendre le champ optionnel
+};
+
+// Types pour les données de distribution des notes
+type RatingDistribution = {
+  name: string;
+  value: number;
+  color: string;
+  bgColor: string;
+};
 
 // Composant de tooltip personnalisé
 const CustomTooltip = ({ active, payload, label }: any) => {
@@ -60,7 +87,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
       <div className="bg-white p-3 rounded-lg shadow-lg border border-gray-200">
         <p className="font-semibold text-gray-900">{label}</p>
         <p className="text-sm text-gray-600">
-          Note: <span className="font-medium">{payload[0].value}</span>
+          Note: <span className="font-medium">{payload[0].payload.average}</span>
         </p>
         <p className="text-sm text-gray-600">
           Avis: <span className="font-medium">{payload[0].payload.count}</span>
@@ -71,30 +98,14 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   return null;
 };
 
-// Composant de légende personnalisé
-const CustomLegend = ({ payload }: any) => {
-  return (
-    <div className="flex justify-center space-x-4 mt-4">
-      {payload.map((entry: any, index: number) => (
-        <div key={`legend-${index}`} className="flex items-center">
-          <div 
-            className="w-3 h-3 rounded-full mr-1" 
-            style={{ backgroundColor: entry.color }}
-          />
-          <span className="text-xs text-gray-600">{entry.value}</span>
-        </div>
-      ))}
-    </div>
-  );
-};
-
-const MetricCard = ({ metric }: { metric: typeof metrics[0] }) => {
+// Composant de carte de métrique
+const MetricCard = ({ metric }: { metric: Metric }) => {
   const isIncrease = metric.changeType === 'increase';
-  
+
   return (
-    <motion.div 
+    <motion.div
       className="p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100"
-      whileHover={{ y: -2 }}
+      whileHover={{ y: -5, transition: { duration: 0.2 } }}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
@@ -104,10 +115,9 @@ const MetricCard = ({ metric }: { metric: typeof metrics[0] }) => {
           <p className="text-sm font-medium text-gray-500">{metric.name}</p>
           <div className="mt-1 flex items-baseline">
             <p className="text-2xl font-semibold text-gray-900">{metric.value}</p>
-            <span 
-              className={`ml-2 flex items-center text-sm font-medium ${
-                isIncrease ? 'text-green-600' : 'text-red-600'
-              }`}
+            <span
+              className={`ml-2 flex items-center text-sm font-medium ${isIncrease ? 'text-green-600' : 'text-red-600'
+                }`}
             >
               {isIncrease ? (
                 <ArrowUpIcon className="h-4 w-4 flex-shrink-0" aria-hidden="true" />
@@ -123,7 +133,7 @@ const MetricCard = ({ metric }: { metric: typeof metrics[0] }) => {
           <div className="mt-4 h-16">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart
-                data={metric.trend.map((value, i) => ({ value, name: i }))}
+                data={metric.trend?.map((value, i) => ({ value, name: i })) ?? []}
                 margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
               >
                 <defs>
@@ -156,22 +166,125 @@ const MetricCard = ({ metric }: { metric: typeof metrics[0] }) => {
 export default function CustomerInsights() {
   const [timeRange, setTimeRange] = useState('6m');
   const [isMounted, setIsMounted] = useState(false);
+  const [chartType, setChartType] = useState<'average' | 'count' | 'responseRate'>('average');
 
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  // Générer les données mensuelles à partir des avis
+  const reviewData = useMemo(() => groupReviewsByMonth(sampleReviews), []);
 
-  if (!isMounted) {
-    return (
-      <div className="space-y-6">
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="h-32 bg-gray-100 rounded-xl animate-pulse"></div>
-          ))}
-        </div>
-      </div>
-    );
-  }
+  // Calculer les métriques globales
+  const metrics = useMemo<Metric[]>(() => {
+    const totalReviews = reviewData.reduce((sum, month) => sum + month.count, 0);
+    const avgRating = reviewData.length > 0
+      ? Number((reviewData.reduce((sum, month) => sum + month.average * month.count, 0) / totalReviews).toFixed(1))
+      : 0;
+    const publishedReviews = reviewData.reduce((sum, month) => sum + month.published, 0);
+    const pendingReviews = reviewData.reduce((sum, month) => sum + month.pending, 0);
+    const avgResponseRate = reviewData.length > 0
+      ? Math.round(reviewData.reduce((sum, month) => sum + month.responseRate, 0) / reviewData.length)
+      : 0;
+
+    return [
+      {
+        id: 1,
+        name: 'Note moyenne',
+        value: avgRating.toFixed(1),
+        change: '+0.2',
+        changeType: 'increase' as const,
+        trend: reviewData.map(month => month.average)
+      },
+      {
+        id: 2,
+        name: 'Avis publiés',
+        value: publishedReviews.toString(),
+        change: `+${Math.round(publishedReviews * 0.15)}`,
+        changeType: 'increase' as const,
+        trend: reviewData.map(month => month.published)
+      },
+      {
+        id: 3,
+        name: 'Avis en attente',
+        value: pendingReviews.toString(),
+        change: pendingReviews > 0 ? `+${Math.round(pendingReviews * 0.1)}` : '0',
+        changeType: pendingReviews > 0 ? 'increase' : 'decrease',
+        trend: reviewData.map(month => month.pending)
+      },
+      {
+        id: 4,
+        name: 'Taux de réponse',
+        value: `${avgResponseRate}%`,
+        change: '+5%',
+        changeType: 'increase' as const,
+        trend: reviewData.map(month => month.responseRate)
+      },
+    ];
+  }, [reviewData]);
+
+  // Calculer la distribution des notes
+  const ratingDistribution = useMemo<RatingDistribution[]>(() => {
+    // Compter le nombre d'avis par note (1-5 étoiles)
+    const ratingCounts = [0, 0, 0, 0, 0]; // Indices 0-4 pour les notes 1-5
+
+    sampleReviews.forEach(review => {
+      const rating = Math.round(review.rating); // Arrondir la note à l'entier le plus proche
+      if (rating >= 1 && rating <= 5) {
+        ratingCounts[5 - rating]++; // Inverser l'ordre pour avoir 5 étoiles en premier
+      }
+    });
+
+    const totalRatings = sampleReviews.length;
+
+    // Si aucun avis, retourner des valeurs par défaut
+    if (totalRatings === 0) {
+      return [
+        { name: '5 étoiles', value: 0, color: '#10B981', bgColor: 'bg-green-100' },
+        { name: '4 étoiles', value: 0, color: '#3B82F6', bgColor: 'bg-blue-100' },
+        { name: '3 étoiles', value: 0, color: '#F59E0B', bgColor: 'bg-yellow-100' },
+        { name: '2 étoiles', value: 0, color: '#F97316', bgColor: 'bg-orange-100' },
+        { name: '1 étoile', value: 0, color: '#EF4444', bgColor: 'bg-red-100' }
+      ];
+    }
+
+    // Calculer les pourcentages
+    return [
+      {
+        name: '5 étoiles',
+        value: Math.round((ratingCounts[0] / totalRatings) * 100),
+        color: '#10B981',
+        bgColor: 'bg-green-100'
+      },
+      {
+        name: '4 étoiles',
+        value: Math.round((ratingCounts[1] / totalRatings) * 100),
+        color: '#3B82F6',
+        bgColor: 'bg-blue-100'
+      },
+      {
+        name: '3 étoiles',
+        value: Math.round((ratingCounts[2] / totalRatings) * 100),
+        color: '#F59E0B',
+        bgColor: 'bg-yellow-100'
+      },
+      {
+        name: '2 étoiles',
+        value: Math.round((ratingCounts[3] / totalRatings) * 100),
+        color: '#F97316',
+        bgColor: 'bg-orange-100'
+      },
+      {
+        name: '1 étoile',
+        value: Math.round((ratingCounts[4] / totalRatings) * 100),
+        color: '#EF4444',
+        bgColor: 'bg-red-100'
+      }
+    ];
+  }, [sampleReviews]);
+
+  // Calculer la note moyenne globale
+  const averageRating = useMemo(() => {
+    if (sampleReviews.length === 0) return 0;
+    const sum = sampleReviews.reduce((total, review) => total + review.rating, 0);
+    return sum / sampleReviews.length;
+  }, [sampleReviews]);
 
   return (
     <div className="space-y-6">
@@ -206,20 +319,9 @@ export default function CustomerInsights() {
               </div>
             </div>
             
-            <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {metrics.map((metric, index) => (
-                <motion.div
-                  key={metric.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ 
-                    duration: 0.5,
-                    delay: index * 0.1,
-                    ease: [0.4, 0, 0.2, 1]
-                  }}
-                >
-                  <MetricCard metric={metric} />
-                </motion.div>
+            <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+              {metrics.map((metric) => (
+                <MetricCard key={metric.id} metric={metric} />
               ))}
             </div>
           </div>
@@ -307,20 +409,20 @@ export default function CustomerInsights() {
                     </div>
                   </div>
                   <div className="text-sm text-gray-500">
-                    {Math.round((item.value / 100) * 1234)} avis
+                    {sampleReviews.filter(review => Math.round(review.rating) === (5 - index)).length} avis
                   </div>
                 </div>
                 <div className="w-full bg-gray-100 rounded-full h-2.5 overflow-hidden">
                   <motion.div
                     className={`h-full rounded-full`}
-                    style={{ 
+                    style={{
                       backgroundColor: item.color,
-                      width: 0
+                      width: `${item.value}%`
                     }}
                     initial={{ width: 0 }}
                     animate={{ width: `${item.value}%` }}
-                    transition={{ 
-                      duration: 0.8, 
+                    transition={{
+                      duration: 0.8,
                       delay: 0.2 + (index * 0.1),
                       ease: [0.4, 0, 0.2, 1]
                     }}
@@ -335,24 +437,26 @@ export default function CustomerInsights() {
             <div className="flex items-center">
               <div className="flex items-center">
                 {[1, 2, 3, 4, 5].map((star) => (
-                  <StarIcon 
+                  <StarIcon
                     key={star}
-                    className={`h-6 w-6 ${star <= 4 ? 'text-yellow-400' : 'text-gray-300'}`}
-                    fill={star <= 4 ? 'currentColor' : 'none'}
+                    className={`h-6 w-6 ${star <= Math.round(averageRating) ? 'text-yellow-400' : 'text-gray-300'}`}
+                    fill={star <= Math.round(averageRating) ? 'currentColor' : 'none'}
                   />
                 ))}
-                <span className="ml-2 text-lg font-semibold text-gray-900">4.6</span>
+                <span className="ml-2 text-lg font-semibold text-gray-900">
+                  {averageRating.toFixed(1)}
+                </span>
                 <span className="ml-1 text-sm text-gray-500">/ 5.0</span>
               </div>
               <div className="ml-auto text-sm text-gray-500">
-                Basé sur 1,234 avis
+                Basé sur {sampleReviews.length} avis
               </div>
             </div>
-            
+
             <div className="mt-4 bg-blue-50 p-3 rounded-lg">
-              <p className="text-sm text-blue-700">
+              {/* <p className="text-sm text-blue-700">
                 <span className="font-medium">+12%</span> par rapport au mois dernier
-              </p>
+              </p> */}
             </div>
           </div>
         </motion.div>

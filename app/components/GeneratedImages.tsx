@@ -382,7 +382,7 @@ const GeneratedImages = () => {
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="absolute inset-0 bg-gray-500 bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                <div className="absolute inset-0  bg-opacity-0 group-hover:bg-black/50 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
                   <button
                     onClick={() => handleDownload(image.imageUrl, image.title)}
                     className="bg-white p-2 rounded-full shadow-lg text-gray-700 hover:bg-gray-100 transition-colors"

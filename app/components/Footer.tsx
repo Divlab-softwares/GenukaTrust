@@ -3,7 +3,7 @@ import LogoGenukaTrust from "../assets/images/Genuka1.jpg";
 import { link } from "fs";
 
 const Footer: React.FC = () => {
-    const resources = {labels: ["Documentation", "Guides", "Centre d'aide", "API"] , links:["/docs", "#", "#", "/api-docs"]};
+    const resources = {labels: ["Documentation", "API"] , links:["/docs", "/api-docs"]};
     const legal = {labels: ["Conditions d'utilisation", "Politique de confidentialité", "Mentions légales", "CGV"], links:["/cgu", "/privacy", "/mentions-legales", "/cgv"]};
     const socialIcons = {labels: ["fab fa-facebook-f", "fab fa-twitter", "fab fa-instagram", "fab fa-linkedin-in"], links:["#", "#", "#", "# "]};
 
@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
                 <div>
                     <div className="flex items-center mb-2">
                         <img src={LogoGenukaTrust.src} alt="Logo" className="w-auto h-15 rounded-lg border border-gray-200 dark:border-gray-700" />
-                        <span className="ml-2 text-xl font-bold bg-gradient-to-r from-primary-600 to-primary-800 dark:from-primary-400 dark:to-primary-300 bg-clip-text text-transparent">
+                        <span className="ml-2 text-xl font-bold bg-linear-to-r from-primary-600 to-primary-800 dark:from-primary-400 dark:to-primary-300 bg-clip-text text-transparent">
                             Genuka Trust
                         </span>
                     </div>
@@ -56,7 +56,7 @@ const Footer: React.FC = () => {
                             <a href="mailto:support@genuka-trust.com" className="hover:text-primary-600 dark:hover:text-primary-400">support@genuka-trust.com</a>
                         </li>
                         <li className="flex items-center">
-                            <i className="fas fa-phone-alt mr-2 text-primary-600 dark:text-primary-400"></i> +237 695 961 093
+                            <i className="fas fa-phone-alt mr-2 text-primary-600 dark:text-primary-400"></i> +237 652 50 96 74
                         </li>
                         <li className="flex items-center">
                             <i className="fas fa-map-marker-alt mr-2 text-primary-600 dark:text-primary-400"></i> Douala, Cameroun
