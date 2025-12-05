@@ -25,8 +25,7 @@ Genuka Trust est une application intelligente connectée à la plateforme Genuka
    - Les avis positifs sont intégrés dans : un widget d’avis pour le site Genuka du marchand, des images prêtes pour réseaux sociaux, des badges de confiance dynamiques.
 
 ### 👉 Objectif : aider les PME à transformer leurs avis clients en véritable levier de confiance, augmenter la preuve sociale, booster la conversion, et créer de la confiance automatiquement.
-
-<p align="center"> <img src="https://via.placeholder.com/900x350/EAEAEA/333333?text=Widget+Reviews+Preview" width="90%"> </p>
+<p align="center"> <img src="https://github.com/Divlab-softwares/GenukaTrust/blob/main/app/assets/images/evolution.jpeg" width="90%"/> </p>
 
 ## ❗ 3.  ___Problème que GenukaTrust cherche à résoudre___
 
@@ -50,7 +49,6 @@ Genuka Trust est une application intelligente connectée à la plateforme Genuka
     ✔ Widget d’avis moderne pour les boutiques Genuka  
     ✔ Export & partage automatique sur réseaux sociaux  
 
-<p align="center"> <img src="https://github.com/Divlab-softwares/GenukaTrust/blob/main/app/assets/images/evolution.jpeg" width="90%"/> </p>
 
 ## 🛠 4.  ___Technologies utilisées___
 
