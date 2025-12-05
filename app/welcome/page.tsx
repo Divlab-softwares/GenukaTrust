@@ -53,7 +53,16 @@ export default function Home() {
     >
 
       {/* En-tête simple */}
-      <Topbar />
+      <header className={` text-gray-600 backdrop-blur-sm border-b sticky top-0 z-50`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
+          <a href="/" className="flex items-center space-x-2">
+            <img src="/images/logo.png" alt="Genuka Trust" className="h-12 w-auto rounded-xl" />
+            <span className="text-2xl font-bold bg-linear-to-r from-amber-500 to-amber-700 bg-clip-text text-transparent">
+              Genuka Trust
+            </span>
+          </a>
+        </div>
+      </header>
 
       {/* Contenu principal */}
       <motion.main 
