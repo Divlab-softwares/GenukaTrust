@@ -50,7 +50,7 @@ Genuka Trust est une application intelligente connectée à la plateforme Genuka
     ✔ Widget d’avis moderne pour les boutiques Genuka  
     ✔ Export & partage automatique sur réseaux sociaux  
 
-<p align="center"> <img src="https://via.placeholder.com/900x350/1e1e2f/FFFFFF?text=Dashboard+IA+Sentiment+Analysis" width="90%"/> </p>
+<p align="center"> <img src="https://github.com/Divlab-softwares/GenukaTrust/blob/main/app/assets/images/evolution.jpeg" width="90%"/> </p>
 
 ## 🛠 4.  ___Technologies utilisées___
 
@@ -72,7 +72,6 @@ Badges techniques
 📈 Dashboard  
 <p align="center"><img src="https://github.com/Divlab-softwares/GenukaTrust/blob/main/app/assets/images/en_tete_dashord.png" width="80%"></p>
 ⭐ Badges de confiance
-<p align="center"><img src="https://via.placeholder.com/600x200/EDEDED/333333?text=Trusted+Seller+Badges" width="70%"></p>
 
 ## 🙌 6. Équipe & Contributions
 
