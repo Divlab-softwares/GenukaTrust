@@ -65,11 +65,9 @@ const ClientFeedbackPage: React.FC = () => {
                       onMouseLeave={() => setHoverRating(0)}
                       className="focus:outline-none"
                     >
-                      <FaStar
-                        size={28}
-                        className={`transition-colors duration-200 ${star <= (hoverRating || rating) ? "text-yellow-400" : "text-gray-300 dark:text-gray-500"
-                          }`}
-                      />
+                      <span className={`transition-colors duration-200 ${star <= (hoverRating || rating) ? "text-yellow-400" : "text-gray-300 dark:text-gray-500" }`}>
+                        <FaStar size={28} />
+                      </span>
                     </button>
                   ))}
                 </div>

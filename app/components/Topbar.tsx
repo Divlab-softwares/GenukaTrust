@@ -10,7 +10,7 @@ interface TopbarProps {
   userName?: string;
   userInitials?: string;
   theme?: string;
-  setTheme: (theme: string) => void;
+  setTheme?: (theme: string) => void;
 }
 
 const Topbar: React.FC<TopbarProps> = ({ userName = "Divin", userInitials = "JD", theme, setTheme }) => {
@@ -22,12 +22,13 @@ const Topbar: React.FC<TopbarProps> = ({ userName = "Divin", userInitials = "JD"
   // };
 
   const setThemes = () => {
-    if (theme === "cupcake") {
-      setTheme("dark");  
-    } else {
-      setTheme("cupcake");
+    if (setTheme) {
+      if (theme === "cupcake") {
+        setTheme("dark");  
+      } else {
+        setTheme("cupcake");
+      }
     }
-    
   };
 
   return (
