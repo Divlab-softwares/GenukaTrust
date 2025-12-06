@@ -3,7 +3,7 @@ import axios from "axios";
 import { fetchParameterByUrl } from "@/app/utils/param";
 
 const api = axios.create({
-    baseURL: "/",           // Ou l'URL de ton API
+    baseURL: "",           // Ou l'URL de ton API
     withCredentials: false,
     headers: {
         "Content-Type": "application/json",
