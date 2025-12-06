@@ -69,6 +69,8 @@ const ClientFeedbackPage: React.FC = () => {
     //   console.error(err);
     //   alert("Impossible d'envoyer l'avis, réessayez plus tard.");
     // }
+
+    setSubmitted(true);
   };
 
   return (
