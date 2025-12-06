@@ -46,29 +46,29 @@ const ClientFeedbackPage: React.FC = () => {
       comment,
     };
 
-    try {
-      const res = await fetch(
-        "https://452b385caae3.ngrok-free.app/api/feedback", // Remplace par ton endpoint Laravel
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        }
-      );
+    // try {
+    //   const res = await fetch(
+    //     "https://localhost:8080/api/feedback", // Remplace par ton endpoint Laravel
+    //     {
+    //       method: "POST",
+    //       headers: { "Content-Type": "application/json" },
+    //       body: JSON.stringify(payload),
+    //     }
+    //   );
 
-      const data = await res.json();
+    //   const data = await res.json();
 
-      console.log(data);
+    //   console.log(data);
 
-      if (data.success) {
-        setSubmitted(true);
-      } else {
-        alert("Erreur : " + data.message);
-      }
-    } catch (err) {
-      console.error(err);
-      alert("Impossible d'envoyer l'avis, réessayez plus tard.");
-    }
+    //   if (data.success) {
+    //     setSubmitted(true);
+    //   } else {
+    //     alert("Erreur : " + data.message);
+    //   }
+    // } catch (err) {
+    //   console.error(err);
+    //   alert("Impossible d'envoyer l'avis, réessayez plus tard.");
+    // }
   };
 
   return (
