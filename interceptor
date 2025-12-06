@@ -1,0 +1,66 @@
+
+
+
+
+export const fetchParameterByUrl = (url: string) => {
+    const { searchParams } = new URL(url);
+    const companyId = searchParams.get("company_id");
+    const timestamp = searchParams.get("timestamp");
+    const hmac = searchParams.get("hmac");
+
+    return {
+        hmac: hmac ?? "",
+        timestamp: timestamp ?? "",
+        companyId: companyId ?? "",
+    };
+};
+
+export const fetchParameter = async (params: Record<string, string | string[] | undefined>) => {
+  while (typeof window === "undefined") {
+    await new Promise(resolve => setTimeout(resolve, 50)); 
+
+  const { hmac, timestamp, companyId } = fetchParameterByUrl(window.location.href);
+  console.log('companyId', companyId);
+
+  return new URLSearchParams({
+    hmac: hmac ?? "",
+    timestamp: timestamp ?? "",
+    company_id: companyId ?? "",
+  });
+};
+
+//intercepteur
+
+const api = axios.create({
+  baseURL: "/",
+  withCredentials: false,
+  headers: {
+    "Content-Type": "application/json",
+    Accept: "application/json",
+  },
+});
+
+api.interceptors.request.use((config) => {
+
+  if (typeof window !== "undefined") {
+    const urlParams = new URLSearchParams(window.location.search);
+
+  
+
+   const {hmac,timestamp,companyId}= fetchParameterByUrl(window.location.href);
+
+    
+    if (hmac || timestamp || companyId) {
+      config.params = {
+        ...(config.params || {}),
+        ...(hmac && { hmac }),
+        ...(timestamp && { timestamp }),
+        ...(companyId && { company_id:companyId }),
+      };
+    }
+  }
+
+  return config;
+});
+
+export default api;
