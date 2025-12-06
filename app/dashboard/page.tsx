@@ -10,6 +10,7 @@ import { motion } from 'framer-motion';
 import TimeDisplay from '../components/TimeDisplay';
 import Footer from '../components/Footer';
 import { useEffect, useState } from 'react';
+import api from "@/app/api/feedback/route";
 
 // Composant Header amélioré avec logo Genuka
 const Header =() =>{
@@ -98,6 +99,31 @@ export default function Home() {
     { nom: "Masque Nourrissant", etoiles: 4.7, avis: 856, avis_pos: 90, position: 2 },
     { nom: "Gel Nettoyant Doux", etoiles: 4.6, avis: 723, avis_pos: 89, position: 1 },
   ])
+
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+  
+    const fetchFeedbacks = async () => {
+      try {
+        const res = await api.get("https://647c83fd1a2d.ngrok-free.app/api/dashboard"); // Remplace par ton endpoint Laravel
+        console.log("DATA:", res.data);
+
+        if(res.data.success){
+          // Traite les données reçues et mets à jour l'état si nécessaire
+          setData(res.data);
+        } else {
+          console.error("Erreur lors de la récupération des donnees");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchFeedbacks();
+
+
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-50">

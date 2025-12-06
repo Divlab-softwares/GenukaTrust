@@ -48,7 +48,7 @@ const ClientFeedbackPage: React.FC = () => {
 
     try {
       const res = await fetch(
-        "https://647c83fd1a2d.ngrok-free.app/api/feedback", // Remplace par ton endpoint Laravel
+        "https://ton-backend-api.com/api/feedback", // Remplace par ton endpoint Laravel
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -57,8 +57,6 @@ const ClientFeedbackPage: React.FC = () => {
       );
 
       const data = await res.json();
-
-      console.log(data);
 
       if (data.success) {
         setSubmitted(true);
@@ -75,31 +73,35 @@ const ClientFeedbackPage: React.FC = () => {
     <>
       <Topbar theme={theme} setTheme={setTheme} />
       <main
-        className={`grow ${theme === "dark"
+        className={`grow ${
+          theme === "dark"
             ? "bg-linear-to-br from-gray-900 to-gray-800 text-gray-100"
             : "text-gray-800"
-          } min-h-screen flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden`}
+        } min-h-screen flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden`}
         data-theme={theme}
       >
         <FallBeamBackground lineCount={20} beamColorClass="genuka" />
         <div
-          className={`w-full max-w-xl ${theme === "dark"
+          className={`w-full max-w-xl ${
+            theme === "dark"
               ? "bg-gray-800/80 border-gray-700/50"
               : "bg-white/90"
-            } backdrop-blur-sm rounded-2xl p-8 border border-gray-200/50 shadow-[0px_5px_20px_rgb(253,152,46,0.5)] hover:translate-y-[-2px] hover:shadow-[0px_10px_30px_rgb(253,152,46,0.7)] transition-all duration-300`}
+          } backdrop-blur-sm rounded-2xl p-8 border border-gray-200/50 shadow-[0px_5px_20px_rgb(253,152,46,0.5)] hover:translate-y-[-2px] hover:shadow-[0px_10px_30px_rgb(253,152,46,0.7)] transition-all duration-300`}
         >
           <h1
-            className={`text-3xl ${theme === "dark"
+            className={`text-3xl ${
+              theme === "dark"
                 ? "text-white bg-linear-to-r from-primary-500 to-primary-600"
                 : "text-black bg-linear-to-r from-primary-800 to-primary-900"
-              } font-bold mb-4 bg-clip-text`}
+            } font-bold mb-4 bg-clip-text`}
           >
             Laissez votre avis ✨
           </h1>
 
           <p
-            className={`${theme === "dark" ? "text-gray-200" : "text-gray-900"
-              } mb-6 text-sm`}
+            className={`${
+              theme === "dark" ? "text-gray-200" : "text-gray-900"
+            } mb-6 text-sm`}
           >
             Votre retour nous aide à améliorer nos services et à mieux vous
             satisfaire.
@@ -111,8 +113,9 @@ const ClientFeedbackPage: React.FC = () => {
                 Merci pour votre avis !
               </h2>
               <p
-                className={`${theme === "dark" ? "text-gray-300" : "text-gray-600"
-                  }`}
+                className={`${
+                  theme === "dark" ? "text-gray-300" : "text-gray-600"
+                }`}
               >
                 Nous apprécions votre retour.
               </p>
@@ -135,10 +138,11 @@ const ClientFeedbackPage: React.FC = () => {
                       className="focus:outline-none"
                     >
                       <span
-                        className={`transition-colors duration-200 ${star <= (hoverRating || rating)
+                        className={`transition-colors duration-200 ${
+                          star <= (hoverRating || rating)
                             ? "text-yellow-400"
                             : "text-gray-300 dark:text-gray-500"
-                          }`}
+                        }`}
                       >
                         <FaStar size={28} />
                       </span>
@@ -160,10 +164,11 @@ const ClientFeedbackPage: React.FC = () => {
                   value={comment}
                   onChange={(e) => setComment(e.target.value)}
                   rows={4}
-                  className={`w-full px-4 py-3 border-2 ${theme === "dark"
+                  className={`w-full px-4 py-3 border-2 ${
+                    theme === "dark"
                       ? "border-gray-700 text-white bg-gray-700/50"
                       : "border-gray-200"
-                    } rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200`}
+                  } rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200`}
                 ></textarea>
               </div>
 
@@ -196,3 +201,5 @@ const ClientFeedbackPage: React.FC = () => {
 };
 
 export default ClientFeedbackPage;
+
+
