@@ -51,7 +51,10 @@ const getRandomGradient = (index: number) => {
   return avatarGradients[index % avatarGradients.length];
 };
 
-const RecentReviews = (): React.ReactElement => {
+const RecentReviews = ({data}: {data: {latest_reviews: Review[]}}): React.ReactElement => {
+
+
+
   const [reviews, setReviews] = useState<Review[]>(initialReviews);
 
   // Référence pour le conteneur des avis

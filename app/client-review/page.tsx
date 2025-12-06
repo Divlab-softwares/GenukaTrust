@@ -48,7 +48,7 @@ const ClientFeedbackPage: React.FC = () => {
 
     try {
       const res = await fetch(
-        "http://192.168.18.30:8000/api/feedback", // Remplace par ton endpoint Laravel
+        "https://452b385caae3.ngrok-free.app/api/feedback", // Remplace par ton endpoint Laravel
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

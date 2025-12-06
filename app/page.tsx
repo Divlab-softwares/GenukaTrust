@@ -100,13 +100,13 @@ export default function Home() {
     { nom: "Gel Nettoyant Doux", etoiles: 4.6, avis: 723, avis_pos: 89, position: 1 },
   ])
 
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<{ latest_reviews: any[] } | null>({ latest_reviews: [] });
 
   useEffect(() => {
 
     const fetchFeedbacks = async () => {
       try {
-        const res = await api.get("http://192.168.18.30:8000/api/dashboard"); // Remplace par ton endpoint Laravel
+        const res = await api.get("https://452b385caae3.ngrok-free.app/api/dashboard"); // Remplace par ton endpoint Laravel
         console.log("DATA:", res.data);
 
         if (res.data.success) {
@@ -146,7 +146,7 @@ export default function Home() {
         </div>
 
         <div className="mb-8">
-          <RecentReviews />
+          <RecentReviews data={data ?? { latest_reviews: [] }} />
         </div>
 
         <div className="mb-8">

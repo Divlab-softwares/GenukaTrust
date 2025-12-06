@@ -163,6 +163,8 @@ const MetricCard = ({ metric }: { metric: Metric }) => {
   );
 };
 
+
+
 export default function CustomerInsights() {
   const [timeRange, setTimeRange] = useState('6m');
   const [isMounted, setIsMounted] = useState(false);
